@@ -4,23 +4,27 @@ import {useNavigate} from 'react-router-dom';
 
 export const GoogleOAuth = () => {
      
-    const [loading, setLoading] = useState<Boolean>(true);
+    const [loading, setLoading] = useState<boolean>(true);
     const navigate = useNavigate();
     const endpoint = 'endpoint';
     useEffect(() => {
         const apiCall = async() => {
             try {
+                console.log('hi');
                 const response = await axios.get(endpoint);
-                setLoading(true);
-                navigate('/Dashbaord');
+                console.log(response.data);
+                setLoading(false);
+                navigate('/dashboard');
 
             } catch (error) {
                 console.error("unable to log user in", error);
+                setLoading(false);
+
             } 
         }
         apiCall();
 
-    }), [navigate] // this will only run once
+    }, [navigate]) // this will only run once
     
     if (loading) { 
         return (
@@ -29,5 +33,6 @@ export const GoogleOAuth = () => {
             </div>
         )
     }
-    setLoading(false);
+
+    return (<div>Failure</div>)
 }
