@@ -1,0 +1,10 @@
+/Users/chantal/projects/new-dating-app/backend/obj/Debug/net10.0/dating-app-v2.csproj.AssemblyReference.cache
+/Users/chantal/projects/new-dating-app/backend/obj/Debug/net10.0/rpswa.dswa.cache.json
+/Users/chantal/projects/new-dating-app/backend/obj/Debug/net10.0/dating-app-v2.GeneratedMSBuildEditorConfig.editorconfig
+/Users/chantal/projects/new-dating-app/backend/obj/Debug/net10.0/dating-app-v2.AssemblyInfoInputs.cache
+/Users/chantal/projects/new-dating-app/backend/obj/Debug/net10.0/dating-app-v2.AssemblyInfo.cs
+/Users/chantal/projects/new-dating-app/backend/obj/Debug/net10.0/dating-app-v2.csproj.CoreCompileInputs.cache
+/Users/chantal/projects/new-dating-app/backend/obj/Debug/net10.0/dating-app-v2.MvcApplicationPartsAssemblyInfo.cache
+/Users/chantal/projects/new-dating-app/backend/obj/Debug/net10.0/dating-app-v2.RazorAssemblyInfo.cache
+/Users/chantal/projects/new-dating-app/backend/obj/Debug/net10.0/dating-app-v2.RazorAssemblyInfo.cs
+/Users/chantal/projects/new-dating-app/backend/obj/Debug/net10.0/dating-app-v2.sourcelink.json

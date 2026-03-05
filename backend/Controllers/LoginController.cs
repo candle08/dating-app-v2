@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using System.Security.Claims;
 using api.Controllers;
 using Models.User;
+Microsoft.AspNet.Mvc.Controller;
 
 namespace api.Controllers
 {
