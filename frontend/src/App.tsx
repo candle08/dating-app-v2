@@ -1,15 +1,17 @@
-import LoginPage from './pages/LoginPage.tsx'
+import {LoginPage} from './pages/LoginPage.tsx'
 import { Footer } from './components/Footer.tsx'
-import {Header} from './components/Header.tsx'
-import { Routes, Route, BrowserRouter } from 'react-router-dom'
-
+import { Header } from './components/Header.tsx'
+import { AuthProvider } from './components/AuthContext.tsx'
 function App() {
   return (
     <>
-    <Header />
-    <LoginPage />
-    <Footer />
-    
+      <AuthProvider>
+        <Header />
+        <LoginPage />
+        <Footer />
+      </AuthProvider>
+
+
     </>
   )
 }
