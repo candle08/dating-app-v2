@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 import axios from 'axios';
 // interfaces for everything
 interface User {
@@ -35,6 +35,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     // login api call, which sends info to backend database to validate user
 
     const login = async (username: string, password: string): Promise<void> => {
+        console.log('hi');
         const data = {
             username: username,
             password: password
@@ -81,4 +82,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
 };
 
-export const useAuth = () => useContext(AuthContext);
+export const useAuth = (): AuthContextType => {
+    const context = useContext(AuthContext);
+    if (!context) throw new Error("useAuth undefined");
+    return context;
+};
