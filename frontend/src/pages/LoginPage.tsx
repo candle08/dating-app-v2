@@ -17,6 +17,8 @@ export const LoginPage: React.FC = () => {
         }
     }
 
+    if (user) navigate('/Dashboard');
+
     return (
         <>
             <div>

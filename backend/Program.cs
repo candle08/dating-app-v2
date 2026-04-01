@@ -32,17 +32,6 @@ app.MapControllerRoute(
 
 string clientId = Environment.GetEnvironmentVariable("GOOGLE_OAUTH_CLIENT_ID") ?? throw new Exception("GOOGLE_OAUTH_CLIENT_ID is not set");
 string clientSecret = Environment.GetEnvironmentVariable("GOOGLE_OAUTH_CLIENT_SECRET") ?? throw new Exception("secret not set");
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
-})
-
-.AddGoogle(options =>
- {
-     options.ClientId = clientId;
-     options.ClientSecret = clientSecret;
- });
 
 var dbConnectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
 var connectionString = builder.Configuration.ConnectionString(dbConnectionString);

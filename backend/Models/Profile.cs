@@ -1,4 +1,4 @@
-namespace Models.Profile;
+namespace Models;
 
 public class Profile
 {

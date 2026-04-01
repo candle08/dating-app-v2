@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 import axios from 'axios';
+
 // interfaces for everything
 interface User {
     id: number,
@@ -16,12 +17,17 @@ interface AuthContextType {
     logout: () => void,
 }
 
+interface apiResponse {
+    user: User,
+    token: string,
+}
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [user, setUser] = useState<null | User>(null);
     const [loading, setLoading] = useState<true | false>(true);
+    const backendUrl = 'http://localhost:8080';
 
     // check if user already logged in
     useEffect(() => {
@@ -41,9 +47,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             password: password
         }
         try {
-            const response = await axios.post('', data);
+
+            const response: apiResponse = await axios.post('', data);
             setUser(response.user);
             localStorage.setItem('user', JSON.stringify(response.user));
+            localStorage.setItem('token', JSON.stringify(response.token));
         } catch {
             console.log('login failed');
         }
@@ -59,9 +67,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         }
 
         try {
-            const response = await axios.post('', data);
+            const response: apiResponse = await axios.post('', data);
             setUser(response.user);
             localStorage.setItem('user', JSON.stringify(response.user));
+            localStorage.setItem('token', JSON.stringify(response.token));
+
         } catch {
             console.log('womp womp');
         }
@@ -84,6 +94,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
 export const useAuth = (): AuthContextType => {
     const context = useContext(AuthContext);
-    if (!context) throw new Error("useAuth undefined");
+    if (context === undefined) throw new Error("useAuth undefined");
     return context;
 };

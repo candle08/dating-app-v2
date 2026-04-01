@@ -8,9 +8,10 @@ export const SignUp = () => {
     const [password, setPassword] = useState<string>('');
     const [username, setUsername] = useState<string>('');
 
-    const { signup: signup } = useAuth();
+    const { signup } = useAuth();
 
     const handleSubmit = async (e: React.FormEvent) => {
+        console.log('hi');
         e.preventDefault();
         try {
             await (signup(username, password, firstName, lastName))
