@@ -1,11 +1,8 @@
-using System.Reflection.Metadata;
-using System.Runtime.CompilerServices;
-using System.Security.Claims;
-using api.Controllers;
-using Models.User;
-Microsoft.AspNetCore.Mvc;
-Microsoft.AspNetCore.Authentication;
-Microsoft.AspNetCore.Authentication.Google;
+using System.Net.Http;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authentication;
+
 
 namespace api.Controllers
 {
@@ -14,19 +11,21 @@ namespace api.Controllers
 
     public class LoginController : ControllerBase
     {
-        public static const Uri baseUri = Environment.GetEnvironmentVariable("FRONTEND_URL");
+        // public const Uri baseUri = Environment.GetEnvironmentVariable("FRONTEND_URL");
 
         [HttpGet("login")]
         public IActionResult Login()
         {
-            
+            Console.WriteLine("Login");
+            return Ok();
         }
 
         [HttpGet("signup")]
 
         public IActionResult Signup()
         {
-            
+            return Ok();
+
         }
 
 

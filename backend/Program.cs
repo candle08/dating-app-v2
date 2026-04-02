@@ -30,12 +30,9 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
-string clientId = Environment.GetEnvironmentVariable("GOOGLE_OAUTH_CLIENT_ID") ?? throw new Exception("GOOGLE_OAUTH_CLIENT_ID is not set");
-string clientSecret = Environment.GetEnvironmentVariable("GOOGLE_OAUTH_CLIENT_SECRET") ?? throw new Exception("secret not set");
-
-var dbConnectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
-var connectionString = builder.Configuration.ConnectionString(dbConnectionString);
-builder.Services.AddDbContext<AppDbContext>(options =>
-   options.UseNpgsql(connectionString));
+// var dbConnectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
+// var connectionString = builder.Configuration.ConnectionString(dbConnectionString);
+// builder.Services.AddDbContext<AppDbContext>(options =>
+//    options.UseNpgsql(connectionString));
 
 app.Run();

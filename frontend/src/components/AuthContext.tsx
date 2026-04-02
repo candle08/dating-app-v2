@@ -1,8 +1,8 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
-import axios from 'axios';
+import {auth} from '../routes/api'
 
 // interfaces for everything
-interface User {
+export interface User {
     id: number,
     firstName: string,
     lastName: string,
@@ -17,17 +17,12 @@ interface AuthContextType {
     logout: () => void,
 }
 
-interface apiResponse {
-    user: User,
-    token: string,
-}
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [user, setUser] = useState<null | User>(null);
     const [loading, setLoading] = useState<true | false>(true);
-    const backendUrl = 'http://localhost:8080';
 
     // check if user already logged in
     useEffect(() => {
@@ -41,20 +36,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     // login api call, which sends info to backend database to validate user
 
     const login = async (username: string, password: string): Promise<void> => {
-        console.log('hi');
         const data = {
             username: username,
             password: password
         }
-        try {
-
-            const response: apiResponse = await axios.post('', data);
-            setUser(response.user);
-            localStorage.setItem('user', JSON.stringify(response.user));
-            localStorage.setItem('token', JSON.stringify(response.token));
-        } catch {
-            console.log('login failed');
-        }
+        auth(data, 'login');
     }
 
     // sign up api call, sends info to backend db to create user
@@ -66,22 +52,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             lastName: lastName,
         }
 
-        try {
-            const response: apiResponse = await axios.post('', data);
-            setUser(response.user);
-            localStorage.setItem('user', JSON.stringify(response.user));
-            localStorage.setItem('token', JSON.stringify(response.token));
-
-        } catch {
-            console.log('womp womp');
-        }
-
+        auth(data, 'signup');
     }
 
     // logout
     const logout = () => {
         setUser(null);
         localStorage.removeItem('user');
+
     }
 
     return (
