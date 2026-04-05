@@ -2,6 +2,9 @@ using System.Net.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authentication;
+using System.Diagnostics;
+using System.Text.Json.Nodes;
+using System.Text.Json;
 
 
 namespace api.Controllers
@@ -23,11 +26,11 @@ namespace api.Controllers
                     firstname = "bob",
                     lastname = "zhang",
                     email = "bob.zhang@gmail.com",
-                    password = "",
+                    password = "a",
                 }
             };
 
-            return tempUser;
+            return Ok(tempUser);
         }
 
         [HttpPost("signup")]

@@ -13,7 +13,6 @@ export interface User {
 interface AuthContextType {
     user: User | null,
     loading: boolean,
-    setUser: (user: User | null) => void,
     login: (username: string, password: string) => Promise<void>,
     signup: (username: string, password: string, firstName: string, lastName: string) => Promise<void>,
     logout: () => void,
@@ -51,11 +50,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             password: password
         }
         try {
-            const response : apiResponse = await auth(data, 'login');
+            const response: apiResponse = await auth(data, 'login');
             setUser(response.user);
+            console.log("user", user);
             localStorage.setItem('user', JSON.stringify(response.user));
             localStorage.setItem('token', JSON.stringify(response.token));
-
         } catch {
             console.log('login failed');
         }
@@ -70,7 +69,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             lastName: lastName,
         }
 
-        auth(data, 'signup');
+        try {
+            const response: apiResponse = await auth(data, 'signup');
+            setUser(response.user);
+            localStorage.setItem('user', JSON.stringify(response.user));
+            localStorage.setItem('token', JSON.stringify(response.token));
+
+        } catch {
+            console.log('signup failed');
+        }
     }
 
     // logout
@@ -81,7 +88,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
 
     return (
-        <AuthContext.Provider value={{ user, setUser, loading, login, logout, signup }}>
+        <AuthContext.Provider value={{ user, loading, login, logout, signup }}>
             {children}
         </AuthContext.Provider>
     )
