@@ -15,6 +15,7 @@ dist-ssr
 *.local
 
 backend/bin/Debug/net10.0 
+backend/obj
 
 # Editor directories and files
 .vscode/*

@@ -7,7 +7,17 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReactApp",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:5173") // Your React URL
+                  .AllowAnyHeader()
+                  .AllowAnyMethod()
+                  .AllowCredentials(); // Required if you use Cookies/Identity
+        });
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -20,7 +30,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
-
+app.UseCors("AllowReactApp");
 app.UseAuthorization();
 
 app.MapStaticAssets();

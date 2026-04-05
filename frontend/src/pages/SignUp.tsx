@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { useAuth } from '../components/AuthContext';
+import { useAuth } from '../context/AuthContext';
 
 export const SignUp = () => {
     const [firstName, setFirstName] = useState<string>('');

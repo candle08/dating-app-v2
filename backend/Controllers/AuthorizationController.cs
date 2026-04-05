@@ -11,18 +11,28 @@ namespace api.Controllers
 
     public class LoginController : ControllerBase
     {
-        // public const Uri baseUri = Environment.GetEnvironmentVariable("FRONTEND_URL");
 
-        [HttpGet("login")]
-        public IActionResult Login()
+        [HttpPost("login")]
+        public ActionResult Login()
         {
-            Console.WriteLine("Login");
-            return Ok();
+            var tempUser = new
+            {
+                token = "123",
+                user = new
+                {
+                    firstname = "bob",
+                    lastname = "zhang",
+                    email = "bob.zhang@gmail.com",
+                    password = "",
+                }
+            };
+
+            return tempUser;
         }
 
-        [HttpGet("signup")]
+        [HttpPost("signup")]
 
-        public IActionResult Signup()
+        public ActionResult Signup()
         {
             return Ok();
 

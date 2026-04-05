@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../components/AuthContext';
+import { useAuth } from '../context/AuthContext';
 
 export const LoginPage: React.FC = () => {
     const navigate = useNavigate();
@@ -18,6 +18,7 @@ export const LoginPage: React.FC = () => {
     }
 
     if (user) navigate('/Dashboard');
+
 
     return (
         <>
