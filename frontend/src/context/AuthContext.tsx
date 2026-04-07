@@ -34,6 +34,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     const setUser = (newUser: User | null) => {
         setUserState(newUser);
+        
         if (newUser) localStorage.setItem('user', JSON.stringify(newUser));
         else {
             localStorage.removeItem('user');
