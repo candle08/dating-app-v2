@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "OC9Kj1W3wMg=",
+  "dgSpecHash": "pNX8K+4nj3U=",
   "success": true,
   "projectFilePath": "/Users/chantal/projects/new-dating-app/backend/dating-app-v2.csproj",
   "expectedPackageFiles": [
@@ -20,6 +20,10 @@
     "/Users/chantal/.nuget/packages/microsoft.entityframeworkcore.design/10.0.3/microsoft.entityframeworkcore.design.10.0.3.nupkg.sha512",
     "/Users/chantal/.nuget/packages/microsoft.entityframeworkcore.relational/10.0.3/microsoft.entityframeworkcore.relational.10.0.3.nupkg.sha512",
     "/Users/chantal/.nuget/packages/microsoft.extensions.dependencymodel/10.0.3/microsoft.extensions.dependencymodel.10.0.3.nupkg.sha512",
+    "/Users/chantal/.nuget/packages/microsoft.identitymodel.abstractions/8.17.0/microsoft.identitymodel.abstractions.8.17.0.nupkg.sha512",
+    "/Users/chantal/.nuget/packages/microsoft.identitymodel.jsonwebtokens/8.17.0/microsoft.identitymodel.jsonwebtokens.8.17.0.nupkg.sha512",
+    "/Users/chantal/.nuget/packages/microsoft.identitymodel.logging/8.17.0/microsoft.identitymodel.logging.8.17.0.nupkg.sha512",
+    "/Users/chantal/.nuget/packages/microsoft.identitymodel.tokens/8.17.0/microsoft.identitymodel.tokens.8.17.0.nupkg.sha512",
     "/Users/chantal/.nuget/packages/microsoft.netcore.platforms/1.1.0/microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "/Users/chantal/.nuget/packages/microsoft.visualstudio.solutionpersistence/1.0.52/microsoft.visualstudio.solutionpersistence.1.0.52.nupkg.sha512",
     "/Users/chantal/.nuget/packages/mono.texttemplating/3.0.0/mono.texttemplating.3.0.0.nupkg.sha512",
@@ -34,7 +38,8 @@
     "/Users/chantal/.nuget/packages/system.composition.convention/9.0.0/system.composition.convention.9.0.0.nupkg.sha512",
     "/Users/chantal/.nuget/packages/system.composition.hosting/9.0.0/system.composition.hosting.9.0.0.nupkg.sha512",
     "/Users/chantal/.nuget/packages/system.composition.runtime/9.0.0/system.composition.runtime.9.0.0.nupkg.sha512",
-    "/Users/chantal/.nuget/packages/system.composition.typedparts/9.0.0/system.composition.typedparts.9.0.0.nupkg.sha512"
+    "/Users/chantal/.nuget/packages/system.composition.typedparts/9.0.0/system.composition.typedparts.9.0.0.nupkg.sha512",
+    "/Users/chantal/.nuget/packages/system.identitymodel.tokens.jwt/8.17.0/system.identitymodel.tokens.jwt.8.17.0.nupkg.sha512"
   ],
   "logs": []
 }

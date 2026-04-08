@@ -16,7 +16,7 @@ namespace api.Controllers
     {
 
         [HttpPost("login")]
-        public ActionResult Login()
+        public async ActionResult Login()
         {
             var tempUser = new
             {
@@ -29,6 +29,7 @@ namespace api.Controllers
                     password = "a",
                 }
             };
+
 
             return Ok(tempUser);
         }

@@ -40,9 +40,9 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
-// var dbConnectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
+var dbConnectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
 // var connectionString = builder.Configuration.ConnectionString(dbConnectionString);
-// builder.Services.AddDbContext<AppDbContext>(options =>
-//    options.UseNpgsql(connectionString));
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql(dbConnectionString));
 
 app.Run();
