@@ -1,10 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 namespace AppDb;
 
-class AppDbContext : DbContext
-{
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+using Models;
 
-    public DbSet<Models.User> Models.Users { get; set; }
-     
+public class AppDbContext : DbContext
+{
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { } // ctor
+
+    public DbSet<User> Users { get; set; }
+
 }

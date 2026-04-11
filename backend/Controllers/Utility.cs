@@ -8,4 +8,9 @@ public class Utility
     {
         
     }
+
+    public int createNewId()
+    {
+        
+    }
 }
