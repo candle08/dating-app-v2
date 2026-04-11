@@ -2,6 +2,7 @@
 using System.Data;
 using System.Text.Json;
 using Models;
+using AppDb;
 
 public class UserRepository : IUserRepository
 {

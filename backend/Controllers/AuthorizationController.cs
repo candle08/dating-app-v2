@@ -20,7 +20,7 @@ namespace api.Controllers
         private readonly UserRepository _userRepo;
 
         [HttpPost("login")]
-        public async ActionResult Login([FromBody] string username, [FromBody] string password)
+        public async Task<IActionResult> Login([FromBody] string username, [FromBody] string password)
         {
             var tempUser = new
             {
@@ -49,7 +49,7 @@ namespace api.Controllers
 
         [HttpPost("signup")]
 
-        public async ActionResult Signup([FromBody] string username, [FromBody] string password, [FromBody] string firstname, [FromBody] string lastname, [FromBody] string email)
+        public async Task<IActionResult> Signup([FromBody] string username, [FromBody] string password, [FromBody] string firstname, [FromBody] string lastname, [FromBody] string email)
         {
             try
             {
