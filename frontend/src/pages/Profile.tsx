@@ -9,7 +9,12 @@ export const Profile = () => {
     const [age, setAge] = useState<number>();
     const [kids, setKids] = useState<string>('');
     const [typeRelationship, setTypeRelationship] = useState<string>('');
-    const [humor, setHumor] = useState<Array<string>>('');
+    const [humor, setHumor] = useState<Array<string>>([]);
+    
+
+
+    const kidsOptions: Array<string> = ['no kids', 'kids', 'unsure', 'no preference'];
+    const relationshipOptions: Array<string> = ['casual', 'casual open to serious', 'serious', 'serious with timeline for marriage'];
 
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -21,6 +26,7 @@ export const Profile = () => {
         }
 
     }
+
     return <>
         <div>
             <Header />
@@ -44,11 +50,15 @@ export const Profile = () => {
                     />
 
                     <label>type of relationship</label>
-                    <input
-                        type="radio"
-                        value="casual"
-                        onChange={(e) => setTypeRelationship(e.target.value)}
-                    />
+                    {relationshipOptions.map((option) => (
+                        <input
+                            type="radio"
+                            name="relationshipOption"
+                            value={option}
+                            onChange={(e) => setTypeRelationship(e.target.value)}
+                        />
+                    ))}
+
 
                     <label>maximum distance</label>
                     <input
@@ -62,9 +72,18 @@ export const Profile = () => {
                     <label>{distance} " km"</label>
 
                     <label>kids?</label>
-                    <input
+                    {
+                        kidsOptions.map((option) => (
+                            <input
+                                type="radio"
+                                name="kidOption"
+                                value={option}
+                                onChange={(e) => setKids(e.target.value)}
+                            />
+                        ))
 
-                    />
+                    }
+
 
 
 
@@ -72,7 +91,11 @@ export const Profile = () => {
                 <div>
                     <h3>interests & vibes</h3>
 
-                    <label>Favorite TV show(s)?</label>
+                    <label>tv shows?</label>
+                    <p>press enter for each show</p>
+
+                    <label>books?</label>
+                    <p>press enter for each book</p>
                 </div>
 
                 <button type="submit">save</button>
