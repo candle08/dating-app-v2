@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 
 export const SignUp = () => {
-    const [firstName, setFirstName] = useState<string>('');
-    const [lastName, setLastName] = useState<string>('');
+    const [firstname, setfirstname] = useState<string>('');
+    const [lastname, setlastname] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [username, setUsername] = useState<string>('');
 
@@ -14,24 +14,23 @@ export const SignUp = () => {
         console.log('hi');
         e.preventDefault();
         try {
-            await (signup(username, password, firstName, lastName))
+            await (signup(username, password, firstname, lastname))
         } catch {
             console.log('womp womp');
         }
     }
     return <>
         <form onSubmit={handleSubmit}>
-            <label>first name</label>
             <input
                 type="text"
-                value={firstName}
+                value={firstname}
                 placeholder="First Name"
-                onChange={(e) => setFirstName(e.target.value)} />
+                onChange={(e) => setfirstname(e.target.value)} />
             <input
                 type="text"
-                value={lastName}
+                value={lastname}
                 placeholder="Last Name"
-                onChange={(e) => setLastName(e.target.value)} />
+                onChange={(e) => setlastname(e.target.value)} />
             <input
                 type="text"
                 value={username}

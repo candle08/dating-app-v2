@@ -4,8 +4,8 @@ import { auth } from '../routes/api'
 // interfaces for everything
 export interface User {
     id: number,
-    firstName: string,
-    lastName: string,
+    firstname: string,
+    lastname: string,
     username: string,
     password: string,
 }
@@ -15,7 +15,7 @@ interface AuthContextType {
     loading: boolean,
     setUser: (newUser: User | null) => void,
     login: (username: string, password: string) => Promise<void>,
-    signup: (username: string, password: string, firstName: string, lastName: string) => Promise<void>,
+    signup: (username: string, password: string, firstname: string, lastname: string) => Promise<void>,
     logout: () => void,
 }
 
@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     const setUser = (newUser: User | null) => {
         setUserState(newUser);
-        
+
         if (newUser) localStorage.setItem('user', JSON.stringify(newUser));
         else {
             localStorage.removeItem('user');
@@ -72,12 +72,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
 
     // sign up api call, sends info to backend db to create user
-    const signup = async (username: string, password: string, firstName: string, lastName: string): Promise<void> => {
+    const signup = async (username: string, password: string, firstname: string, lastname: string): Promise<void> => {
         const data = {
             username: username,
             password: password,
-            firstName: firstName,
-            lastName: lastName,
+            firstname: firstname,
+            lastname: lastname,
         }
 
         try {
