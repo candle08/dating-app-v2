@@ -9,7 +9,7 @@ import { Dashboard } from './pages/Dashboard.tsx'
 import { SwipingPage } from './pages/Swiping'
 import { Profile } from './pages/Profile'
 import { ProtectedRoute } from './components/ProtectedRoute.tsx'
-
+import './index.css';
 createRoot(document.getElementById('root')!).render(
 
   <StrictMode>
@@ -18,10 +18,10 @@ createRoot(document.getElementById('root')!).render(
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/SignUp" element={<SignUp />} />
+          <Route path="/Profile" element={<Profile />} />
           <Route element={<ProtectedRoute />} >
             <Route path="/Dashboard" element={<Dashboard />} />
             <Route path="/Swiping" element={<SwipingPage />} />
-            <Route path="/Profile" element={<Profile />} />
           </Route>
         </Routes>
         <App />
