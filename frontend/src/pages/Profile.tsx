@@ -4,18 +4,26 @@ import { useAuth } from '../context/AuthContext'
 export const Profile = () => {
     const { user } = useAuth();
 
+    // core values
     const [firstname, setFirstname] = useState<string>(user?.firstname || '');
     const [distance, setDistance] = useState<number>(50);
     const [age, setAge] = useState<number>();
     const [kids, setKids] = useState<string>('');
     const [typeRelationship, setTypeRelationship] = useState<string>('');
     const [humor, setHumor] = useState<Array<string>>([]);
-    
+    const [ageLowerBound, setAgeLowerBound] = useState<number>();
+    const [ageUpperBound, setAgeUpperBound] = useState<number>();
 
-
+    const humorOptions: Array<string> = ['sarcasm', 'dark', 'dad jokes & puns', 'memes']
     const kidsOptions: Array<string> = ['no kids', 'kids', 'unsure', 'no preference'];
     const relationshipOptions: Array<string> = ['casual', 'casual open to serious', 'serious', 'serious with timeline for marriage'];
 
+    // personality & vibes
+    const [movies, setMoves] = useState<Array<string>>([]);
+    const [books, setBooks] = useState<Array<string>>([]);
+    const [hobbies, setHobbies] = useState<Array<string>>([]);
+    const [funNight, setFunNight] = useState<string>('');
+    const [petPeeve, setPetPeeve] = useState<string>('');
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -46,8 +54,24 @@ export const Profile = () => {
                     <input
                         type="number"
                         value={age}
-                        onChange={(e) => setAge(Number(e.target.value))}
+                        onChange={(e) => setAge(e.target.valueAsNumber)}
                     />
+
+                    <label>age boundaries</label>
+                    <input
+                        type="number"
+                        value={ageLowerBound}
+                        min="18"
+                        onChange={(e) => setAgeLowerBound(e.target.valueAsNumber)}
+                    />
+                    <label>lower bound</label>
+                    <input
+                        type="number"
+                        value={ageUpperBound}
+                        max="150"
+                        onChange={(e) => setAgeUpperBound(e.target.valueAsNumber)}
+                    />
+                    <label>upper bound</label>
 
                     <label>type of relationship</label>
                     {relationshipOptions.map((option) => (
@@ -67,7 +91,7 @@ export const Profile = () => {
                         min="10"
                         max="6000"
                         step="10"
-                        onChange={(e) => setDistance(Number(e.target.value))}
+                        onChange={(e) => setDistance(e.target.valueAsNumber)}
                     />
                     <label>{distance} " km"</label>
 
