@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
+import s from '../styling.module.css';
 
 export const SignUp = () => {
     const [firstname, setfirstname] = useState<string>('');
@@ -20,30 +21,45 @@ export const SignUp = () => {
         }
     }
     return <>
-        <form onSubmit={handleSubmit}>
-            <input
-                type="text"
-                value={firstname}
-                placeholder="First Name"
-                onChange={(e) => setfirstname(e.target.value)} />
-            <input
-                type="text"
-                value={lastname}
-                placeholder="Last Name"
-                onChange={(e) => setlastname(e.target.value)} />
-            <input
-                type="text"
-                value={username}
-                placeholder="Username"
-                onChange={(e) => setUsername(e.target.value)} />
-            <input
-                type="text"
-                value={password}
-                placeholder="Password"
-                onChange={(e) => setPassword(e.target.value)} />
-            <button type="submit">Sign up!!</button>
+        <div className="flex justify-center items-center h-screen w-screen">
+            <div className="w-100 justify-items-center">
+                <h1>signup !</h1>
+                <h3 className="mb-10">true love awaits</h3>
+                <div className="">
+                    <form onSubmit={handleSubmit} className="w-80">
+                        <input
+                            className={s.login}
+                            type="text"
+                            value={firstname}
+                            placeholder="First Name"
+                            onChange={(e) => setfirstname(e.target.value)} />
+                        <input
+                            className={s.login}
+                            type="text"
+                            value={lastname}
+                            placeholder="Last Name"
+                            onChange={(e) => setlastname(e.target.value)} />
+                        <input
+                            className={s.login}
+                            type="text"
+                            value={username}
+                            placeholder="Username"
+                            onChange={(e) => setUsername(e.target.value)} />
+                        <input
+                            className={s.login}
+                            type="text"
+                            value={password}
+                            placeholder="Password"
+                            onChange={(e) => setPassword(e.target.value)} />
+                        <button type="submit" className={s.login}>Sign up!!</button>
 
-        </form>
+                    </form>
+                </div>
+            </div>
+
+
+        </div >
+
     </>
 
 

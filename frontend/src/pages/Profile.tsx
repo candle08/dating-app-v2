@@ -53,11 +53,11 @@ export const Profile = () => {
         <div className="justify-items-center">
             <Header />
             <div className="bg-slate-900 justify-items-center w-100 rounded-md p-4">
-                <h1>Profile</h1>
+                <h1 className="text-3xl">Profile</h1>
                 <form onSubmit={handleSubmit}>
                     <div>
                         <h3>core values</h3>
-                        <div >
+                        <div className={s.profile}>
                             <label>preferred firstname</label>
                             <input
                                 type="text"
@@ -67,7 +67,7 @@ export const Profile = () => {
                             />
                         </div>
 
-                        <div>
+                        <div className={s.profile}>
                             <label>age</label>
                             <input
                                 type="number"
@@ -76,7 +76,7 @@ export const Profile = () => {
                             />
                         </div>
 
-                        <div>
+                        <div className={s.profile}>
 
                             <label>age boundaries</label>
                             <input
@@ -96,7 +96,7 @@ export const Profile = () => {
                         </div>
 
 
-                        <div>
+                        <div className={s.profile}>
                             <label>type of relationship</label>
                             {relationshipOptions.map((option) => (
                                 <div>
@@ -112,7 +112,7 @@ export const Profile = () => {
                         </div>
 
 
-                        <div>
+                        <div className={s.profile}>
                             <label>maximum distance</label>
                             <input
                                 type="range"
@@ -125,7 +125,7 @@ export const Profile = () => {
                             <label>{distance} km</label>
                         </div>
 
-                        <div>
+                        <div className={s.profile}>
                             <label>kids?</label>
                             {
                                 kidsOptions.map((option) => (
@@ -149,17 +149,27 @@ export const Profile = () => {
                     </div>
                     <div>
                         <h3>interests & vibes</h3>
+                        <div>
+                            <label>tv shows?</label>
 
-                        <label>tv shows?</label>
+
+                            <input
+                                placeholder="press enter for each show"
+                                value={show}
+                                type="text"
+                            />
+                        </div>
 
 
-                        <input
-                            placeholder="press enter for each show"
-                            value={show}
-                            type="text"
-                        />
+                        <div>
+                            <label>books?</label>
 
-                        <label>books?</label>
+                            <input
+                                placeholder="press enter for each book"
+                                value={books}
+                                type="text"
+                            />
+                        </div>
 
                     </div>
 

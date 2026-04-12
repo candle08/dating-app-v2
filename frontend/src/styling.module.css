@@ -1,9 +1,41 @@
 button {
     width: 5rem;
     background-color: steelblue;
-    border-radius: 10%;
+    border-radius: 0.2rem;
+}
+
+h1 {
+    font-size: x-large;
+}
+
+input:focus {
+    outline: none;
+}
+
+button.login {
+    width: 20rem;
+    background: blueviolet;
+}
+
+label {
+    margin-right: 0.5rem;
+
 }
 
 .profile {
-    margin-bottom: 4rem;
+    margin-bottom: 0.5rem;
+
+}
+
+.login {
+    background: rgb(54, 54, 54);
+    padding: 0.2rem;
+    height: 2.5rem;
+    border-radius: 0.2rem;
+    margin-bottom: 0.5rem;
+    width: 20rem;
+}
+
+.login:hover {
+    background-color: darkslateblue;
 }
