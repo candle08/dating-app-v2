@@ -1,11 +1,10 @@
 import { Header } from '../components/Header'
 import { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
-import s from '../styling.module.css';
+import s from '../styling.module.scss';
 
 export const Profile = () => {
     const { user } = useAuth();
-
     const isMobile = false;
 
     // core values
@@ -23,9 +22,12 @@ export const Profile = () => {
     const relationshipOptions: Array<string> = ['casual', 'casual open to serious', 'serious', 'serious with timeline for marriage'];
 
     // personality & vibes
-    const [show, setShow] = useState<Array<string>>([]);
-    const [books, setBooks] = useState<Array<string>>([]);
-    const [hobbies, setHobbies] = useState<Array<string>>([]);
+    // const [show, setShow] = useState<Array<string>>([]);
+    // const [books, setBooks] = useState<Array<string>>([]);
+    // const [hobbies, setHobbies] = useState<Array<string>>([]);
+    const [shows, setShows] = useState<string>('');
+    const [books, setBooks] = useState<string>('');
+    const [hobbies, setHobbies] = useState<string>('');
     const [funNight, setFunNight] = useState<string>('');
     const [petPeeve, setPetPeeve] = useState<string>('');
 
@@ -39,8 +41,24 @@ export const Profile = () => {
         })
     }
 
+    type formSubmission = {
+        preferredFirstname: string,
+        age: number,
+        ageLowerBound: number,
+        ageUpperBound: number,
+        typeRelationship: Array<string>,
+        humor: Array<string>,
+        maxDistance: number,
+        kids: string,
+        shows: string,
+        books: string,
+        petPeeves: string,
+        funNight: string,
+    }
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        const data: formSubmission = {};
         try {
             // api call to backend to save profile
         } catch {
@@ -138,28 +156,22 @@ export const Profile = () => {
                                         />
                                         <label>{option}</label>
                                     </div>
-
-
                                 ))
-
                             }
                         </div>
-
 
                     </div>
                     <div>
                         <h3>interests & vibes</h3>
                         <div>
                             <label>tv shows?</label>
-
-
                             <input
                                 placeholder="press enter for each show"
-                                value={show}
+                                value={shows}
                                 type="text"
+                                onChange={(e) => setShows(e.target.value)}
                             />
                         </div>
-
 
                         <div>
                             <label>books?</label>
@@ -168,17 +180,15 @@ export const Profile = () => {
                                 placeholder="press enter for each book"
                                 value={books}
                                 type="text"
+                                onChange={(e) => setBooks(e.target.value)}
                             />
                         </div>
-
                     </div>
 
                     <button type="submit">save</button>
 
                 </form>
             </div>
-
-
         </div>
     </>
 }

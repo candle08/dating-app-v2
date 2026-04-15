@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import s from '../styling.module.css';
+import s from '../styling.module.scss';
+import { Footer } from '../components/Footer';
 
 export const LoginPage: React.FC = () => {
     const navigate = useNavigate();
@@ -47,7 +48,6 @@ export const LoginPage: React.FC = () => {
                         </form>
                     </div>
                 </div>
-
 
             </div>
         </>

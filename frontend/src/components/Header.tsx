@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import '../styling.module.css';
+import '../styling.module.scss';
 
 export const Header = () => {
     const { logout } = useAuth();

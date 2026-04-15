@@ -17,11 +17,12 @@ createRoot(document.getElementById('root')!).render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LoginPage />} />
-          <Route path="/SignUp" element={<SignUp />} />
-          <Route path="/Profile" element={<Profile />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/profile" element={<Profile />} />
           <Route element={<ProtectedRoute />} >
-            <Route path="/Dashboard" element={<Dashboard />} />
-            <Route path="/Swiping" element={<SwipingPage />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/swiping" element={<SwipingPage />} />
           </Route>
         </Routes>
         <App />
