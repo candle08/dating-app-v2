@@ -17,10 +17,19 @@ export const auth = async (data: any, type: string) => {
 
 export const getProfile = async() => {
     try {
-        const response = await axios.post('${backendUrl}/api/getProfile');
+        const response = await axios.get(`${backendUrl}/api/getProfile`);
         return response.data;
     } catch (error) {
         console.log('failed');
         throw (error);
+    }
+}
+
+export const sendProfile = async(data: any) => {
+    try {
+        const response = await axios.post(`${backendUrl}/api/sendProfile`, data);
+    } catch (error) {
+        console.log('send profile failed');
+        throw(error);
     }
 }
