@@ -58,7 +58,7 @@ export const Profile = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const data: formSubmission = {};
+        const data: formSubmission;
         try {
             // api call to backend to save profile
         } catch {

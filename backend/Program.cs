@@ -2,7 +2,8 @@ using System.Net;
 using DotNetEnv;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
-
+using Microsoft.EntityFrameworkCore;
+using AppDb;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -18,6 +19,12 @@ builder.Services.AddCors(options =>
                   .AllowCredentials(); // Required if you use Cookies/Identity
         });
 });
+
+var dbConnectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
+// var connectionString = builder.Configuration.ConnectionString(dbConnectionString);
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseNpgsql(dbConnectionString));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -40,9 +47,6 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
-var dbConnectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
-// var connectionString = builder.Configuration.ConnectionString(dbConnectionString);
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(dbConnectionString));
+
 
 app.Run();

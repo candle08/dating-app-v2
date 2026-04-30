@@ -1,6 +1,7 @@
 
 using System.Data;
 using System.Text.Json;
+using Microsoft.EntityFrameworkCore;
 using Models;
 using AppDb;
 
@@ -17,38 +18,42 @@ public class UserRepository : IUserRepository
         var response = await _context.User
         .Where(record => record.username == username)
         .Select(record => new { record.password })
+        .FirstOrDefaultAsync()
         .ConfigureAwait(false);
 
         if (response.password != password)
         {
             return false;
         }
+        return true;
     }
 
-    public async Task<User> FetchUserAsync(string username)
+    public async Task<User?> FetchUserAsync(string username)
     {
         try
         {
             var response = await _context.User
         .Where(record => record.username == username)
-        .Select(record => new { record.firstname, record.lastname, record.email, record.id });
-
+        .FirstOrDefaultAsync()
+        .ConfigureAwait(false);
             return response;
+
         }
         catch (JsonException jsonEx)
         {
-            return ("Failed to retrieve user ", jsonEx);
+            Console.WriteLine("Failed to retrieve user ", jsonEx);
+            return null;
         }
 
     }
 
-    public async Task<User> AddUserAsync(string username, string password, string firstname, string lastname, string email)
+    public async Task<bool> AddUserAsync(string username, string password, string firstname, string lastname, string email)
     {
         try
         {
             var newUser = new User
             {
-                id = createNewId(),
+                // id = Helper.Utility.createNewId(),
                 username = username,
                 firstname = firstname,
                 email = email,
@@ -58,15 +63,14 @@ public class UserRepository : IUserRepository
             await _context.User.AddAsync(newUser).ConfigureAwait(false);
             await _context.SaveChangesAsync().ConfigureAwait(false);
 
-            return newUser;
+            return true;
 
         }
         catch (JsonException jsonEx)
         {
-            return ("Failed to add user to DB: ", jsonEx);
+            Console.WriteLine("Failed to add user to DB: ", jsonEx);
+            return false;
         }
-
-
     }
 
 

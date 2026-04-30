@@ -7,6 +7,7 @@ using System.Text.Json.Nodes;
 using System.Text.Json;
 using Models;
 using System.Data.Common;
+using static Helper.Utility;
 
 
 namespace api.Controllers
@@ -42,9 +43,9 @@ namespace api.Controllers
 
             var user = await _userRepo.FetchUserAsync(username);
 
-            string token = generateJWT();
+            string token = "0"; // generateJWT();
 
-            return Ok(token, user);
+            return Ok(token);
         }
 
         [HttpPost("signup")]
@@ -54,13 +55,13 @@ namespace api.Controllers
             try
             {
                 var user = await _userRepo.AddUserAsync(username, password, firstname, lastname, email);
-                string token = generateJWT();
-                return Ok(token, user);
+                string token = "0"; // Helper.Utility.generateJWT();
+                return Ok(token);
             }
             catch (JsonException jsonEx)
             {
                 Console.WriteLine("failed to add user, ", jsonEx);
-                return;
+                return Ok();
             }
 
         }
