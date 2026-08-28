@@ -1,15 +1,30 @@
 button {
     width: 5rem;
     background-color: steelblue;
+    color: #f3f4f6;
+    border: none;
     border-radius: 0.2rem;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4a7ba8;
 }
 
 h1 {
     font-size: x-large;
 }
 
+input,
+select {
+    background-color: #1e2028;
+    color: #e5e7eb;
+    border: 1px solid #383b47;
+}
+
 input:focus {
     outline: none;
+    border-color: steelblue;
 }
 
 button.login {
@@ -19,7 +34,7 @@ button.login {
 
 label {
     margin-right: 0.5rem;
-
+    color: #cbd5e1;
 }
 
 .profile {
@@ -29,6 +44,8 @@ label {
 
 .login {
     background: rgb(54, 54, 54);
+    color: #f3f4f6;
+    border: none;
     padding: 0.2rem;
     height: 2.5rem;
     border-radius: 0.2rem;

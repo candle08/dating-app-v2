@@ -15,19 +15,22 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <AuthProvider>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignUp />} />
+        <div className="min-h-screen flex flex-col">
+          <div className="flex-1">
+            <Routes>
+              <Route path="/" element={<LoginPage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/signup" element={<SignUp />} />
 
-          <Route element={<ProtectedRoute />} >
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/swiping" element={<SwipingPage />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-          </Route>
-        </Routes>
-        <App />
-
+              <Route element={<ProtectedRoute />} >
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/swiping" element={<SwipingPage />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+              </Route>
+            </Routes>
+          </div>
+          <App />
+        </div>
       </BrowserRouter>
     </AuthProvider>
   </StrictMode>,

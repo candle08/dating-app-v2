@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+:root {
+    color-scheme: dark;
+}
+
+body {
+    background-color: #121317;
+    color: #e5e7eb;
+    min-height: 100vh;
+}
+
+a {
+    color: inherit;
+}

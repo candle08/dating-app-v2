@@ -46,27 +46,27 @@ export const SwipingPage = () => {
     }
 
     return (
-        <div>
+        <div className="flex flex-col items-center px-4 pb-10">
             <Header />
-            <h1>Swiping</h1>
+            <h1 className="text-3xl mb-6">Swiping</h1>
 
             {loading && <p>Loading...</p>}
 
-            {!loading && !profile && <p>No more profiles to rate right now!</p>}
+            {!loading && !profile && <p>no more singles in your area</p>}
 
             {!loading && profile && (
-                <>
-                    <div>
-                        <h2>{profile.firstName}</h2>
+                <div className="w-full max-w-xl flex flex-col items-center gap-6">
+                    <div className="bg-slate-800 rounded-md p-4 flex flex-col items-center gap-3 w-full">
+                        <h2 className="text-xl">{profile.firstName}</h2>
                         {profile.img && <img src={profile.img} alt={profile.firstName} />}
                     </div>
 
-                    <div>
+                    <div className="flex flex-wrap justify-center gap-2">
                         {ratingOptions.map((option) => (
                             <button key={option} onClick={handleClick} value={option}>{option}</button>
                         ))}
                     </div>
-                </>
+                </div>
             )}
         </div>
     )

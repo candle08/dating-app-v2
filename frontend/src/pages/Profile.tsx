@@ -70,7 +70,7 @@ export const Profile = () => {
     return <>
         <div className="justify-items-center">
             <Header />
-            <div className="bg-slate-900 justify-items-center w-100 rounded-md p-4">
+            <div className="bg-slate-800 justify-items-center w-100 rounded-md p-4">
                 <h1 className="text-3xl">Profile</h1>
                 <form onSubmit={handleSubmit}>
                     <div>

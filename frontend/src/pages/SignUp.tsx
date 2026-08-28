@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import s from '../styling.module.scss';
 import { useNavigate } from 'react-router-dom';
@@ -11,8 +11,12 @@ export const SignUp = () => {
     const [username, setUsername] = useState<string>('');
     const [email, setEmail] = useState<string>('');
 
-    const { signup } = useAuth();
+    const { signup, user } = useAuth();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (user) navigate('/dashboard');
+    }, [user]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -62,7 +66,7 @@ export const SignUp = () => {
                         <button type="submit" className={s.login}>Sign up!!</button>
 
                     </form>
-                    <label>Already have an account? <a className="text-yellow-800 hover:text-yellow-900" onClick={() => navigate('/login')}>Login</a></label>
+                    <label>Already have an account? <a className="text-yellow-400 hover:text-yellow-300 cursor-pointer" onClick={() => navigate('/login')}>Login</a></label>
                 </div>
             </div>
 
