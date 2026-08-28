@@ -1,8 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import s from '../styling.module.scss';
-import { Footer } from '../components/Footer';
 
 export const LoginPage: React.FC = () => {
     const navigate = useNavigate();
@@ -19,7 +18,9 @@ export const LoginPage: React.FC = () => {
         }
     }
 
-    if (user) navigate('/Dashboard');
+    useEffect(() => {
+        if (user) navigate('/dashboard');
+    }, [user]);
 
 
     return (
@@ -43,8 +44,8 @@ export const LoginPage: React.FC = () => {
                                 placeholder="Password"
                                 onChange={(e) => setPassword(e.target.value)} />
                             <button type="submit" className={s.login}>Login</button>
-                            <button className={s.login}
-                                onClick={() => (navigate('/SignUp'))}>sign up</button>
+                            <button type="button" className={s.login}
+                                onClick={() => (navigate('/signup'))}>sign up</button>
                         </form>
                     </div>
                 </div>

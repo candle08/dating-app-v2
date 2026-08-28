@@ -7,7 +7,7 @@ export interface User {
     firstname: string,
     lastname: string,
     username: string,
-    password: string,
+    email: string,
 }
 
 interface AuthContextType {
@@ -15,7 +15,7 @@ interface AuthContextType {
     loading: boolean,
     setUser: (newUser: User | null) => void,
     login: (username: string, password: string) => Promise<void>,
-    signup: (username: string, password: string, firstname: string, lastname: string) => Promise<void>,
+    signup: (username: string, password: string, firstname: string, lastname: string, email: string) => Promise<void>,
     logout: () => void,
 }
 
@@ -72,12 +72,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
 
     // sign up api call, sends info to backend db to create user
-    const signup = async (username: string, password: string, firstname: string, lastname: string): Promise<void> => {
+    const signup = async (username: string, password: string, firstname: string, lastname: string, email: string): Promise<void> => {
         const data = {
             username: username,
             password: password,
             firstname: firstname,
             lastname: lastname,
+            email: email,
         }
 
         try {

@@ -1,72 +1,70 @@
 import { Header } from '../components/Header'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useAuth } from '../context/AuthContext'
+import { getMyProfile, saveMyProfile, type UserProfileData } from '../routes/api'
 import s from '../styling.module.scss';
 
 export const Profile = () => {
     const { user } = useAuth();
-    const isMobile = false;
 
     // core values
-    const [firstname, setFirstname] = useState<string>(user?.firstname || '');
+    const [firstname, setFirstname] = useState<string>('');
+    const [img, setImg] = useState<string>('');
     const [distance, setDistance] = useState<number>(50);
-    const [age, setAge] = useState<number>();
+    const [age, setAge] = useState<number | ''>('');
     const [kids, setKids] = useState<string>('');
     const [typeRelationship, setTypeRelationship] = useState<string>('');
-    const [humor, setHumor] = useState<Array<string>>([]);
-    const [ageLowerBound, setAgeLowerBound] = useState<number>();
-    const [ageUpperBound, setAgeUpperBound] = useState<number>();
+    const [ageLowerBound, setAgeLowerBound] = useState<number | ''>('');
+    const [ageUpperBound, setAgeUpperBound] = useState<number | ''>('');
 
-    const humorOptions: Array<string> = ['sarcasm', 'dark', 'dad jokes & puns', 'memes']
     const kidsOptions: Array<string> = ['no kids', 'kids', 'unsure', 'no preference'];
     const relationshipOptions: Array<string> = ['casual', 'casual open to serious', 'serious', 'serious with timeline for marriage'];
 
     // personality & vibes
-    // const [show, setShow] = useState<Array<string>>([]);
-    // const [books, setBooks] = useState<Array<string>>([]);
-    // const [hobbies, setHobbies] = useState<Array<string>>([]);
     const [shows, setShows] = useState<string>('');
     const [books, setBooks] = useState<string>('');
-    const [hobbies, setHobbies] = useState<string>('');
-    const [funNight, setFunNight] = useState<string>('');
-    const [petPeeve, setPetPeeve] = useState<string>('');
 
-    const wrapperSetArray = (input: string, setFunction: any) => {
-        setFunction((prev: Array<string>) => {
-            if (prev.includes(input)) {
-                return prev.filter((hobby) => hobby !== input)
-            } else {
-                return [...prev, input]
-            }
-        })
-    }
-
-    type formSubmission = {
-        preferredFirstname?: string,
-        age?: number,
-        ageLowerBound?: number,
-        ageUpperBound?: number,
-        typeRelationship?: Array<string>,
-        humor?: Array<string>,
-        maxDistance?: number,
-        kids?: string,
-        shows?: string,
-        books?: string,
-        petPeeves?: string,
-        funNight?: string,
-    }
+    useEffect(() => {
+        if (!user) return;
+        setFirstname(user.firstname);
+        getMyProfile(user.id).then((profile) => {
+            if (!profile) return;
+            setFirstname(profile.preferredFirstname || user.firstname);
+            setImg(profile.img || '');
+            setDistance(profile.maxDistance || 50);
+            setAge(profile.age ?? '');
+            setAgeLowerBound(profile.ageLowerBound ?? '');
+            setAgeUpperBound(profile.ageUpperBound ?? '');
+            setKids(profile.kids || '');
+            setTypeRelationship(profile.typeRelationship || '');
+            setShows(profile.shows || '');
+            setBooks(profile.books || '');
+        }).catch(() => console.log('failed to load profile'));
+    }, [user]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const data: formSubmission = {
-            
+        if (!user) return;
+
+        const data: UserProfileData = {
+            userId: user.id,
+            preferredFirstname: firstname,
+            img,
+            age: age === '' ? undefined : age,
+            ageLowerBound: ageLowerBound === '' ? undefined : ageLowerBound,
+            ageUpperBound: ageUpperBound === '' ? undefined : ageUpperBound,
+            maxDistance: distance,
+            typeRelationship,
+            kids,
+            shows,
+            books,
         }
+
         try {
-            // api call to backend to save profile
+            await saveMyProfile(data);
         } catch {
             console.log('unable to save profile');
         }
-
     }
 
     return <>
@@ -88,11 +86,21 @@ export const Profile = () => {
                         </div>
 
                         <div className={s.profile}>
+                            <label>profile photo url</label>
+                            <input
+                                type="text"
+                                value={img}
+                                placeholder="https://..."
+                                onChange={(e) => setImg(e.target.value)}
+                            />
+                        </div>
+
+                        <div className={s.profile}>
                             <label>age</label>
                             <input
                                 type="number"
                                 value={age}
-                                onChange={(e) => setAge(e.target.valueAsNumber)}
+                                onChange={(e) => setAge(e.target.valueAsNumber || '')}
                             />
                         </div>
 
@@ -103,14 +111,14 @@ export const Profile = () => {
                                 type="number"
                                 value={ageLowerBound}
                                 min="18"
-                                onChange={(e) => setAgeLowerBound(e.target.valueAsNumber)}
+                                onChange={(e) => setAgeLowerBound(e.target.valueAsNumber || '')}
                             />
                             <label>lower bound</label>
                             <input
                                 type="number"
                                 value={ageUpperBound}
                                 max="150"
-                                onChange={(e) => setAgeUpperBound(e.target.valueAsNumber)}
+                                onChange={(e) => setAgeUpperBound(e.target.valueAsNumber || '')}
                             />
                             <label>upper bound</label>
                         </div>
@@ -119,11 +127,12 @@ export const Profile = () => {
                         <div className={s.profile}>
                             <label>type of relationship</label>
                             {relationshipOptions.map((option) => (
-                                <div>
+                                <div key={option}>
                                     <input
                                         type="radio"
                                         name="relationshipOption"
                                         value={option}
+                                        checked={typeRelationship === option}
                                         onChange={(e) => setTypeRelationship(e.target.value)}
                                     />
                                     <label>{option}</label>
@@ -149,11 +158,12 @@ export const Profile = () => {
                             <label>kids?</label>
                             {
                                 kidsOptions.map((option) => (
-                                    <div>
+                                    <div key={option}>
                                         <input
                                             type="radio"
                                             name="kidOption"
                                             value={option}
+                                            checked={kids === option}
                                             onChange={(e) => setKids(e.target.value)}
                                         />
                                         <label>{option}</label>

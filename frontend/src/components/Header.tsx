@@ -7,11 +7,11 @@ export const Header = () => {
     const navigate = useNavigate();
     return (
         <div className="w-100 flex justify-between mb-10 mt-5">
-            <button onClick={() => { navigate('/Swiping') }}>
+            <button onClick={() => { navigate('/swiping') }}>
                 swipe
             </button>
-            <button onClick={() => { navigate('/Dashboard') }}>matches</button>
-            <button onClick={() => { navigate('/Profile') }}>
+            <button onClick={() => { navigate('/dashboard') }}>matches</button>
+            <button onClick={() => { navigate('/profile') }}>
                 profile
             </button>
             <button onClick={logout}>

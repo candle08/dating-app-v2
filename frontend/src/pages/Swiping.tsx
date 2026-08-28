@@ -1,51 +1,48 @@
 import { Header } from '../components/Header'
 import { useState, useEffect } from 'react';
 import { getProfile, sendProfile } from '../routes/api'
+import { useAuth } from '../context/AuthContext'
 
-export interface Profile {
+export interface SwipeCard {
+    userId: number,
     firstName: string,
     img: string
 }
 
+const ratingOptions: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
 export const SwipingPage = () => {
-    const [profile, setProfile] = useState<any>(null);
-    const [firstName, setFirstName] = useState<string>('hi');
-    const [img, setImg] = useState<string>('bye');
+    const { user } = useAuth();
+    const [profile, setProfile] = useState<SwipeCard | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
 
-    const rating: Array<number> = [1, 2, 3, 4, 5];
-
-    useEffect(() => {
-        const response = getProfile();
-        setProfile(response);
-    }, [])
-
-
-    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-        const value = e.currentTarget.value;
-        const data = {
-            profile,
-            value,
+    const loadNextProfile = async () => {
+        if (!user) return;
+        setLoading(true);
+        try {
+            const next = await getProfile(user.id);
+            setProfile(next);
+        } catch {
+            console.log('failed to load next profile');
+        } finally {
+            setLoading(false);
         }
-        sendProfile(data); // sending profile and ranking to backend
-
-        const response = getProfile();
-        setProfile(response);
     }
 
-    const DatingProfile = () => {
-        useEffect(() => {
-            setFirstName(profile.firstName);
-            setImg(profile.Img);
-        }, [profile]);
+    useEffect(() => {
+        loadNextProfile();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [user]);
 
-        return (
-            <>
-                <div>
-                    <h1>{firstName}</h1>
-                    <img src={img} />
-                </div>
-            </>
-        )
+    const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        if (!user || !profile) return;
+        const value = Number(e.currentTarget.value);
+        try {
+            await sendProfile(user.id, profile.userId, value);
+        } catch {
+            console.log('failed to send rating');
+        }
+        await loadNextProfile();
     }
 
     return (
@@ -53,13 +50,23 @@ export const SwipingPage = () => {
             <Header />
             <h1>Swiping</h1>
 
-            <DatingProfile />
+            {loading && <p>Loading...</p>}
 
-            {rating.map((option) => (
-                <div>
-                    <button onClick={handleClick} value={option}>{option}</button>
-                </div>
-            )
+            {!loading && !profile && <p>No more profiles to rate right now!</p>}
+
+            {!loading && profile && (
+                <>
+                    <div>
+                        <h2>{profile.firstName}</h2>
+                        {profile.img && <img src={profile.img} alt={profile.firstName} />}
+                    </div>
+
+                    <div>
+                        {ratingOptions.map((option) => (
+                            <button key={option} onClick={handleClick} value={option}>{option}</button>
+                        ))}
+                    </div>
+                </>
             )}
         </div>
     )

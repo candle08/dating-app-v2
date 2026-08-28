@@ -9,15 +9,15 @@ export const SignUp = () => {
     const [lastname, setlastname] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [username, setUsername] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
 
     const { signup } = useAuth();
     const navigate = useNavigate();
 
     const handleSubmit = async (e: React.FormEvent) => {
-        console.log('hi');
         e.preventDefault();
         try {
-            await (signup(username, password, firstname, lastname))
+            await (signup(username, password, firstname, lastname, email))
         } catch {
             console.log('womp womp');
         }
@@ -49,7 +49,13 @@ export const SignUp = () => {
                             onChange={(e) => setUsername(e.target.value)} />
                         <input
                             className={s.login}
-                            type="text"
+                            type="email"
+                            value={email}
+                            placeholder="Email"
+                            onChange={(e) => setEmail(e.target.value)} />
+                        <input
+                            className={s.login}
+                            type="password"
                             value={password}
                             placeholder="Password"
                             onChange={(e) => setPassword(e.target.value)} />

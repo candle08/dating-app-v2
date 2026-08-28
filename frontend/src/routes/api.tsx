@@ -1,6 +1,5 @@
-import { type User, type apiResponse } from "../context/AuthContext";
 import axios from 'axios';
-import {type Profile} from '../pages/Swiping'
+import { type SwipeCard } from '../pages/Swiping'
 const backendUrl = 'http://localhost:5120';
 
 
@@ -15,21 +14,75 @@ export const auth = async (data: any, type: string) => {
     }
 }
 
-export const getProfile = async() => {
+export const getProfile = async (userId: number): Promise<SwipeCard | null> => {
     try {
-        const response = await axios.get(`${backendUrl}/api/getProfile`);
+        const response = await axios.get(`${backendUrl}/api/getProfile`, { params: { userId } });
         return response.data;
     } catch (error) {
-        console.log('failed');
+        console.log('getProfile failed');
         throw (error);
     }
 }
 
-export const sendProfile = async(data: any) => {
+export const sendProfile = async (raterId: number, rateeId: number, value: number) => {
     try {
-        const response = await axios.post(`${backendUrl}/api/sendProfile`, data);
+        const response = await axios.post(`${backendUrl}/api/sendProfile`, { raterId, rateeId, value });
+        return response.data;
     } catch (error) {
         console.log('send profile failed');
-        throw(error);
+        throw (error);
     }
+}
+
+export interface RatedUserView {
+    userId: number,
+    firstname: string,
+    lastname: string,
+    value: number,
+    createdAt: string,
+}
+
+export interface MatchView {
+    userId: number,
+    firstname: string,
+    lastname: string,
+    value: number,
+}
+
+export const getRatingsGiven = async (userId: number): Promise<RatedUserView[]> => {
+    const response = await axios.get(`${backendUrl}/api/dashboard/ratings`, { params: { userId } });
+    return response.data;
+}
+
+export const getMatches = async (userId: number): Promise<MatchView[]> => {
+    const response = await axios.get(`${backendUrl}/api/dashboard/matches`, { params: { userId } });
+    return response.data;
+}
+
+export interface UserProfileData {
+    userId: number,
+    preferredFirstname?: string,
+    img?: string,
+    age?: number,
+    ageLowerBound?: number,
+    ageUpperBound?: number,
+    maxDistance: number,
+    typeRelationship?: string,
+    kids?: string,
+    humor?: string,
+    shows?: string,
+    books?: string,
+    hobbies?: string,
+    funNight?: string,
+    petPeeve?: string,
+}
+
+export const getMyProfile = async (userId: number): Promise<UserProfileData | null> => {
+    const response = await axios.get(`${backendUrl}/api/profile`, { params: { userId } });
+    return response.data;
+}
+
+export const saveMyProfile = async (data: UserProfileData): Promise<UserProfileData> => {
+    const response = await axios.post(`${backendUrl}/api/profile`, data);
+    return response.data;
 }

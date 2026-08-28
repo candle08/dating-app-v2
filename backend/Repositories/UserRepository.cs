@@ -1,6 +1,3 @@
-
-using System.Data;
-using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using Models;
 using AppDb;
@@ -11,60 +8,44 @@ public class UserRepository : IUserRepository
     public UserRepository(AppDbContext context)
     {
         _context = context;
-    } // constructor for loginrepository class
+    }
 
     public async Task<bool> VerifyUserAsync(string username, string password)
     {
         var record = await _context.User.FirstOrDefaultAsync(r => r.username == username);
-        return record is not null && record.password == password;
-
+        return record is not null && BCrypt.Net.BCrypt.Verify(password, record.password);
     }
 
     public async Task<User?> FetchUserAsync(string username)
     {
-        try
-        {
-            var response = await _context.User
-        .Where(record => record.username == username)
-        .FirstOrDefaultAsync()
-        .ConfigureAwait(false);
-            return response;
-
-        }
-        catch (JsonException jsonEx)
-        {
-            Console.WriteLine("Failed to retrieve user ", jsonEx);
-            return null;
-        }
-
+        return await _context.User
+            .Where(record => record.username == username)
+            .FirstOrDefaultAsync();
     }
 
-    public async Task<bool> AddUserAsync(string username, string password, string firstname, string lastname, string email)
+    public async Task<User?> AddUserAsync(string username, string password, string firstname, string lastname, string email)
     {
         try
         {
             var newUser = new User
             {
-                // id = Helper.Utility.createNewId(),
                 username = username,
                 firstname = firstname,
                 lastname = lastname,
                 email = email,
-                password = password,
+                password = BCrypt.Net.BCrypt.HashPassword(password),
+                createdAt = DateTime.UtcNow,
             };
 
-            await _context.User.AddAsync(newUser).ConfigureAwait(false);
-            await _context.SaveChangesAsync().ConfigureAwait(false);
+            await _context.User.AddAsync(newUser);
+            await _context.SaveChangesAsync();
 
-            return true;
-
+            return newUser;
         }
-        catch (JsonException jsonEx)
+        catch (DbUpdateException dbEx)
         {
-            Console.WriteLine("Failed to add user to DB: ", jsonEx);
-            return false;
+            Console.WriteLine("Failed to add user to DB: " + dbEx.Message);
+            return null;
         }
     }
-
-
 }

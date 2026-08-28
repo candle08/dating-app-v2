@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "pNX8K+4nj3U=",
+  "dgSpecHash": "SuEGh8DerIs=",
   "success": true,
   "projectFilePath": "/Users/chantal/projects/new-dating-app/backend/dating-app-v2.csproj",
   "expectedPackageFiles": [
+    "/Users/chantal/.nuget/packages/bcrypt.net-next/4.2.0/bcrypt.net-next.4.2.0.nupkg.sha512",
     "/Users/chantal/.nuget/packages/dotnetenv/3.1.1/dotnetenv.3.1.1.nupkg.sha512",
     "/Users/chantal/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/Users/chantal/.nuget/packages/microsoft.aspnetcore.authentication.google/10.0.3/microsoft.aspnetcore.authentication.google.10.0.3.nupkg.sha512",

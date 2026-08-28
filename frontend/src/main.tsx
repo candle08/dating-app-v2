@@ -19,10 +19,10 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/" element={<LoginPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/swiping" element={<SwipingPage />} />
 
           <Route element={<ProtectedRoute />} >
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/swiping" element={<SwipingPage />} />
             <Route path="/dashboard" element={<Dashboard />} />
           </Route>
         </Routes>
