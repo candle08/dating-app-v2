@@ -15,17 +15,9 @@ public class UserRepository : IUserRepository
 
     public async Task<bool> VerifyUserAsync(string username, string password)
     {
-        var response = await _context.User
-        .Where(record => record.username == username)
-        .Select(record => new { record.password })
-        .FirstOrDefaultAsync()
-        .ConfigureAwait(false);
+        var record = await _context.User.FirstOrDefaultAsync(r => r.username == username);
+        return record is not null && record.password == password;
 
-        if (response.password != password)
-        {
-            return false;
-        }
-        return true;
     }
 
     public async Task<User?> FetchUserAsync(string username)
@@ -56,6 +48,7 @@ public class UserRepository : IUserRepository
                 // id = Helper.Utility.createNewId(),
                 username = username,
                 firstname = firstname,
+                lastname = lastname,
                 email = email,
                 password = password,
             };

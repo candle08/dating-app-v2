@@ -42,23 +42,25 @@ export const Profile = () => {
     }
 
     type formSubmission = {
-        preferredFirstname: string,
-        age: number,
-        ageLowerBound: number,
-        ageUpperBound: number,
-        typeRelationship: Array<string>,
-        humor: Array<string>,
-        maxDistance: number,
-        kids: string,
-        shows: string,
-        books: string,
-        petPeeves: string,
-        funNight: string,
+        preferredFirstname?: string,
+        age?: number,
+        ageLowerBound?: number,
+        ageUpperBound?: number,
+        typeRelationship?: Array<string>,
+        humor?: Array<string>,
+        maxDistance?: number,
+        kids?: string,
+        shows?: string,
+        books?: string,
+        petPeeves?: string,
+        funNight?: string,
     }
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const data: formSubmission;
+        const data: formSubmission = {
+            
+        }
         try {
             // api call to backend to save profile
         } catch {

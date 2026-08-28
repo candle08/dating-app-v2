@@ -1,17 +1,23 @@
 import { Header } from '../components/Header'
-import {useState, useEffect} from 'react';
-import {getProfile, sendProfile} from '../routes/api'
+import { useState, useEffect } from 'react';
+import { getProfile, sendProfile } from '../routes/api'
 
 export interface Profile {
-    data: any,
-} 
+    firstName: string,
+    img: string
+}
 
 export const SwipingPage = () => {
-    const [profile, setProfile] = useState<any | null>(null);
-    const [firstName, setFirstName] = useState<string>('');
-    const [img, setImg] = useState<string>('');
+    const [profile, setProfile] = useState<any>(null);
+    const [firstName, setFirstName] = useState<string>('hi');
+    const [img, setImg] = useState<string>('bye');
 
     const rating: Array<number> = [1, 2, 3, 4, 5];
+
+    useEffect(() => {
+        const response = getProfile();
+        setProfile(response);
+    }, [])
 
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -36,7 +42,7 @@ export const SwipingPage = () => {
             <>
                 <div>
                     <h1>{firstName}</h1>
-                    <img src={img}/>
+                    <img src={img} />
                 </div>
             </>
         )

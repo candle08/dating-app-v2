@@ -2,6 +2,7 @@ namespace Models;
 
 public class Profile
 {
-    public string[] imgs { get; set; }
+    public string img { get; set; }
+    public string firstName { get; set; }
 
 }

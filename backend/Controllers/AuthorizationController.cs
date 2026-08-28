@@ -19,9 +19,11 @@ namespace api.Controllers
     {
 
         private readonly UserRepository _userRepo;
+        public LoginController(IUserRepository userRepo) => _userRepo = (UserRepository?)userRepo;
+        public record LoginRequest(string Username, string Password);
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] string username, [FromBody] string password)
+        public async Task<IActionResult> Login([FromBody] LoginRequest req)
         {
             var tempUser = new
             {
@@ -34,23 +36,26 @@ namespace api.Controllers
                     password = "a",
                 }
             };
-            var pwdCorrect = await _userRepo.VerifyUserAsync(username, password);
+            var pwdCorrect = await _userRepo.VerifyUserAsync(req.username, req.password);
 
             if (!pwdCorrect)
             {
                 return NotFound(new { Message = "Password was incorrect" });
             }
 
-            var user = await _userRepo.FetchUserAsync(username);
+            var user = await _userRepo.FetchUserAsync(req.username);
 
             string token = "0"; // generateJWT();
 
-            return Ok(token);
+            return Ok(new { user, token });
         }
+
+        public record SignupRequest(string Username, string Password, string firstname, string lastname, string email);
 
         [HttpPost("signup")]
 
-        public async Task<IActionResult> Signup([FromBody] string username, [FromBody] string password, [FromBody] string firstname, [FromBody] string lastname, [FromBody] string email)
+
+        public async Task<IActionResult> Signup([FromBody] SignupRequest req)
         {
             try
             {
