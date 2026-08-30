@@ -90,9 +90,9 @@ public class RatingRepository : IRatingRepository
 
         return await mine
             .Join(_context.Rating,
-                  mine => new { other = mine.rateeId, mine.value },
-                  theirs => new { other = theirs.raterId, theirs.value },
-                  (mine, theirs) => theirs.raterId)
+                mine => new { other = mine.rateeId, me = userId, mine.value },
+                theirs => new { other = theirs.raterId, me = theirs.rateeId, theirs.value },
+                (mine, theirs) => theirs.raterId)
             .Join(_context.User,
                   otherId => otherId,
                   u => u.id,
