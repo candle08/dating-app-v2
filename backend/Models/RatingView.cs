@@ -6,6 +6,7 @@ public class RatedUserView
     public int userId { get; set; }
     public string firstname { get; set; } = "";
     public string lastname { get; set; } = "";
+    public string? img { get; set; }
     public int value { get; set; }
     public DateTime createdAt { get; set; }
 }
@@ -16,5 +17,6 @@ public class MatchView
     public int userId { get; set; }
     public string firstname { get; set; } = "";
     public string lastname { get; set; } = "";
+    public string? img { get; set; }
     public int value { get; set; }
 }

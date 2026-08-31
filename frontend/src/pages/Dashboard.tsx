@@ -37,7 +37,12 @@ export const Dashboard = () => {
                             <ul className="flex flex-col gap-2">
                                 {matches.map((match) => (
                                     <li key={match.userId} className="flex justify-between items-center bg-slate-900 rounded-md px-3 py-2">
-                                        <span>{match.firstname} {match.lastname}</span>
+                                        <span className="flex items-center gap-3">
+                                            {match.img
+                                                ? <img src={match.img} alt={match.firstname} className="w-10 h-10 rounded-full object-cover" />
+                                                : <span className="w-10 h-10 rounded-full bg-slate-700" />}
+                                            {match.firstname} {match.lastname}
+                                        </span>
                                         <span className="text-sm text-pink-400">you both rated {match.value}</span>
                                     </li>
                                 ))}
@@ -50,7 +55,12 @@ export const Dashboard = () => {
                             <ul className="flex flex-col gap-2">
                                 {ratings.map((rating) => (
                                     <li key={rating.userId} className="flex justify-between items-center bg-slate-900 rounded-md px-3 py-2">
-                                        <span>{rating.firstname} {rating.lastname}</span>
+                                        <span className="flex items-center gap-3">
+                                            {rating.img
+                                                ? <img src={rating.img} alt={rating.firstname} className="w-10 h-10 rounded-full object-cover" />
+                                                : <span className="w-10 h-10 rounded-full bg-slate-700" />}
+                                            {rating.firstname} {rating.lastname}
+                                        </span>
                                         <span className="text-sm text-blue-300">you rated them a {rating.value}</span>
                                     </li>
                                 ))}

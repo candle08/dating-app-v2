@@ -71,14 +71,22 @@ public class RatingRepository : IRatingRepository
             .Join(_context.User,
                   r => r.rateeId,
                   u => u.id,
-                  (r, u) => new RatedUserView
-                  {
-                      userId = u.id,
-                      firstname = u.firstname,
-                      lastname = u.lastname,
-                      value = r.value,
-                      createdAt = r.createdAt,
-                  })
+                  (r, u) => new { r, u })
+            // left join to UserProfile - not everyone has filled one out
+            .GroupJoin(_context.UserProfile,
+                       x => x.u.id,
+                       p => p.userId,
+                       (x, profiles) => new { x.r, x.u, profiles })
+            .SelectMany(x => x.profiles.DefaultIfEmpty(),
+                        (x, p) => new RatedUserView
+                        {
+                            userId = x.u.id,
+                            firstname = x.u.firstname,
+                            lastname = x.u.lastname,
+                            img = p != null ? p.img : null,
+                            value = x.r.value,
+                            createdAt = x.r.createdAt,
+                        })
             .OrderByDescending(v => v.createdAt)
             .ToListAsync();
     }
@@ -100,13 +108,21 @@ public class RatingRepository : IRatingRepository
             .Join(_context.Rating.Where(r => r.raterId == userId),
                   x => x.otherId,
                   r => r.rateeId,
-                  (x, r) => new MatchView
-                  {
-                      userId = x.u.id,
-                      firstname = x.u.firstname,
-                      lastname = x.u.lastname,
-                      value = r.value,
-                  })
+                  (x, r) => new { x.otherId, x.u, r })
+            // left join to UserProfile - not everyone has filled one out
+            .GroupJoin(_context.UserProfile,
+                       x => x.otherId,
+                       p => p.userId,
+                       (x, profiles) => new { x.u, x.r, profiles })
+            .SelectMany(x => x.profiles.DefaultIfEmpty(),
+                        (x, p) => new MatchView
+                        {
+                            userId = x.u.id,
+                            firstname = x.u.firstname,
+                            lastname = x.u.lastname,
+                            img = p != null ? p.img : null,
+                            value = x.r.value,
+                        })
             .ToListAsync();
     }
 }

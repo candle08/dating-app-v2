@@ -38,6 +38,7 @@ export interface RatedUserView {
     userId: number,
     firstname: string,
     lastname: string,
+    img?: string,
     value: number,
     createdAt: string,
 }
@@ -46,6 +47,7 @@ export interface MatchView {
     userId: number,
     firstname: string,
     lastname: string,
+    img?: string,
     value: number,
 }
 

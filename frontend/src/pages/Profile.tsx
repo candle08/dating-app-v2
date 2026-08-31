@@ -55,6 +55,7 @@ export const Profile = () => {
         } catch {
             console.log('unable to save profile');
         } finally {
+            console.log('saved profile');
             setSaving(false);
         }
     }
