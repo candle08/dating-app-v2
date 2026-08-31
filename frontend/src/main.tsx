@@ -7,7 +7,7 @@ import { AuthProvider } from './context/AuthContext.tsx'
 import { LoginPage } from './pages/LoginPage.tsx'
 import { Dashboard } from './pages/Dashboard.tsx'
 import { SwipingPage } from './pages/Swiping'
-import { Profile } from './pages/Profile'
+import { Profile } from './pages/Profile.tsx'
 import { ProtectedRoute } from './components/ProtectedRoute.tsx'
 import './index.css';
 createRoot(document.getElementById('root')!).render(
