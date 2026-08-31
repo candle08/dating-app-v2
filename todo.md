@@ -1,5 +1,9 @@
 - add rate limiting + other security stuff
+- make scaleable 
+    - caching/redis, more time efficient ways to search for matches
+    - load swiping profiles in batches (ex 20 profiles fetched from backend at once)
 - add location
     -> filter by location & use user's location
+    -> eventually find more scalable ways to calculate distance
 - texting channel?? for after a match
-- 
+- deploy ????????????????????????????
