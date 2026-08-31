@@ -1,0 +1,5 @@
+- add rate limiting + other security stuff
+- add location
+    -> filter by location & use user's location
+- texting channel?? for after a match
+- 
