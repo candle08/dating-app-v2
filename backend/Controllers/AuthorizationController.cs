@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using static Helper.Utility;
 
 namespace api.Controllers
 {
@@ -59,7 +60,7 @@ namespace api.Controllers
                 return StatusCode(500, new { Message = "Failed to create user" });
             }
 
-            string token = "0"; // generateJWT();
+            string token = generateJWT(); // generateJWT();
 
             return Ok(new { user = ToSafeUser(user), token });
         }

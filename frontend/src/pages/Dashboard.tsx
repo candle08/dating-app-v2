@@ -50,7 +50,7 @@ export const Dashboard = () => {
                         </section>
 
                         <section className="bg-slate-800 rounded-md p-4">
-                            <h2 className="text-xl mb-3 text-blue-300">Everyone you've ranked</h2>
+                            <h2 className="text-xl mb-3 text-rose-300">Everyone you've ranked</h2>
                             {ratings.length === 0 && <p className="text-slate-400">no rankings yet.</p>}
                             <ul className="flex flex-col gap-2">
                                 {ratings.map((rating) => (
@@ -61,7 +61,7 @@ export const Dashboard = () => {
                                                 : <span className="w-10 h-10 rounded-full bg-slate-700" />}
                                             {rating.firstname} {rating.lastname}
                                         </span>
-                                        <span className="text-sm text-blue-300">you rated them a {rating.value}</span>
+                                        <span className="text-sm text-rose-300">you rated them a {rating.value}</span>
                                     </li>
                                 ))}
                             </ul>

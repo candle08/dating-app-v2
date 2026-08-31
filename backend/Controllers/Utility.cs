@@ -5,7 +5,7 @@ using System.Text;
 namespace Helper;
 public class Utility
 {
-    public string generateJWT()
+    public static string generateJWT()
     {
         return "j";
     }

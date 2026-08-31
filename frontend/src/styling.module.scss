@@ -1,6 +1,6 @@
 button {
     width: 5rem;
-    background-color: steelblue;
+    background-color: #be123c;
     color: #f3f4f6;
     border: none;
     border-radius: 0.2rem;
@@ -8,7 +8,7 @@ button {
 }
 
 button:hover {
-    background-color: #4a7ba8;
+    background-color: #e11d48;
 }
 
 h1 {
@@ -24,12 +24,12 @@ select {
 
 input:focus {
     outline: none;
-    border-color: steelblue;
+    border-color: #e11d48;
 }
 
 button.login {
     width: 20rem;
-    background: blueviolet;
+    background: #e11d48;
 }
 
 label {
@@ -54,5 +54,5 @@ label {
 }
 
 .login:hover {
-    background-color: darkslateblue;
+    background-color: #9f1239;
 }
