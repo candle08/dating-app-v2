@@ -66,7 +66,7 @@ export const SignUp = () => {
                         <button type="submit" className={s.login}>Sign up!!</button>
 
                     </form>
-                    <label>Already have an account? <a className="text-yellow-400 hover:text-yellow-300 cursor-pointer" onClick={() => navigate('/login')}>Login</a></label>
+                    <label>Already have an account? <a className="cursor-pointer hover:text-pink-400" onClick={() => navigate('/login')}>Login</a></label>
                 </div>
             </div>
 
