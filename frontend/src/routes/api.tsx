@@ -47,6 +47,7 @@ export interface MatchView {
     userId: number,
     firstname: string,
     lastname: string,
+    email: string,
     img?: string,
     value: number,
 }
@@ -58,6 +59,8 @@ export const getRatingsGiven = async (userId: number): Promise<RatedUserView[]> 
 
 export const getMatches = async (userId: number): Promise<MatchView[]> => {
     const response = await axios.get(`${backendUrl}/api/dashboard/matches`, { params: { userId } });
+    console.log('email: ', response.data[0].email);
+    console.log('firstname: ', response.data[0].firstname);
     return response.data;
 }
 

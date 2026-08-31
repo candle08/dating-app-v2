@@ -120,6 +120,7 @@ public class RatingRepository : IRatingRepository
                             userId = x.u.id,
                             firstname = x.u.firstname,
                             lastname = x.u.lastname,
+                            email = x.u.email,
                             img = p != null ? p.img : null,
                             value = x.r.value,
                         })

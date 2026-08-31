@@ -36,14 +36,18 @@ export const Dashboard = () => {
                             {matches.length === 0 && <p className="text-slate-400">no matches :(</p>}
                             <ul className="flex flex-col gap-2">
                                 {matches.map((match) => (
-                                    <li key={match.userId} className="flex justify-between items-center bg-slate-900 rounded-md px-3 py-2">
-                                        <span className="flex items-center gap-3">
-                                            {match.img
-                                                ? <img src={match.img} alt={match.firstname} className="w-10 h-10 rounded-full object-cover" />
-                                                : <span className="w-10 h-10 rounded-full bg-slate-700" />}
-                                            {match.firstname} {match.lastname}
-                                        </span>
-                                        <span className="text-sm text-pink-400">you both rated {match.value}</span>
+                                    <li key={match.userId} className="flex flex-col gap-1 bg-slate-900 rounded-md px-3 py-2">
+                                        <div className="flex justify-between items-center">
+                                            <span className="flex items-center gap-3">
+                                                {match.img
+                                                    ? <img src={match.img} alt={match.firstname} className="w-10 h-10 rounded-full object-cover" />
+                                                    : <span className="w-10 h-10 rounded-full bg-slate-700" />}
+                                                {match.firstname} {match.lastname}
+                                            </span>
+                                            <span className="text-sm text-pink-400">you both rated each other a {match.value}</span>
+                                        </div>
+
+                                        <span className="text-sm text-pink-400">here's their email: {match.email} - now go fall in love !!</span>
                                     </li>
                                 ))}
                             </ul>
