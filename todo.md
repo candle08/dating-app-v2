@@ -1,4 +1,5 @@
 - add rate limiting + other security stuff
+- get a working jwt system
 - make scaleable 
     - caching/redis, more time efficient ways to search for matches
     - load swiping profiles in batches (ex 20 profiles fetched from backend at once)
